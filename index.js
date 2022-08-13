@@ -15,6 +15,7 @@ app.set('port', process.env.PORT || 3000);
 
 // body-parser
 var bodyParser = require('body-parser');
+const { getSystemErrorMap } = require('util');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -29,8 +30,8 @@ oracledb.autoCommit = true;
 router.post('/dbinsert', function(request, response){
 
     oracledb.getConnection({
-        user            : dbConfig.user,
-        password        : dbConfig.password,
+        user            : system,
+        password        : 1234,
         connectString   : dbConfig.connectString
     },
     function(err, connection) {
@@ -40,7 +41,7 @@ router.post('/dbinsert', function(request, response){
         }
 
         let query = 'INSERT INTO NUTRI(TYPE,NAME,DAY,COUNT)' + 'VALUES(:TYPE, :NAME, :DAY, :COUNT)';
-}
+});
+});
 
-// 라우터 객체를 app 객체에 등록
-app.use('/', router);
+
