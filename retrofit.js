@@ -96,7 +96,20 @@ router.get('/recommand', function(req, res) {
             res.send(results);
             }
         )}
+    
 
+
+    else if ((req.query.data).charAt(0) == '0') {
+        connection.query(
+            "DELETE FROM USER WHERE NAME = ?", [(req.query.data).substring(1)],
+            function(err, results, fields){
+                if(err){
+                    console.log(err);
+                } else {
+                    console.log(results);
+                }
+            })
+    }
 
     else {
         var name = req.query.data;
@@ -109,7 +122,6 @@ router.get('/recommand', function(req, res) {
             }
         })
         }
-
 })
 
 
